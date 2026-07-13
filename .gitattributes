@@ -1,0 +1,5 @@
+# Shell scripts must stay LF — CRLF breaks bash on Linux/Mac/WSL
+*.sh text eol=lf
+
+# Normalize everything else to LF in the repo
+* text=auto

@@ -1,0 +1,37 @@
+---
+# Pod with label app=backend-v2
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend-pod
+  labels:
+    scenario: "07-selector-mismatch"
+    app: backend-v2       # <-- pod label
+spec:
+  containers:
+    - name: app
+      image: nginx:stable
+      ports:
+        - containerPort: 80
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "50m"
+        limits:
+          memory: "64Mi"
+          cpu: "100m"
+  restartPolicy: Always
+---
+# Service selecting app=backend — will have NO endpoints
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-svc
+  labels:
+    scenario: "07-selector-mismatch"
+spec:
+  selector:
+    app: backend           # <-- selector doesn't match pod label (backend-v2 != backend)
+  ports:
+    - port: 80
+      targetPort: 80

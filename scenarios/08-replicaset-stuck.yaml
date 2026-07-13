@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stuck-rollout
+  labels:
+    scenario: "08-replicaset-stuck"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: stuck-rollout
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0      # requires all existing pods healthy before replacing
+  template:
+    metadata:
+      labels:
+        app: stuck-rollout
+    spec:
+      containers:
+        - name: app
+          image: nginx:this-tag-does-not-exist-rollout  # bad image → new pods won't start
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "50m"
+            limits:
+              memory: "64Mi"
+              cpu: "100m"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5

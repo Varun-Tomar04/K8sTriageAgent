@@ -1,0 +1,27 @@
+# API keys — never commit
+.env
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Empty scratch folder
+demo/
+
+# Personal interview-prep material — keep local, never publish
+project-walkthrough.html
+
+.claude/

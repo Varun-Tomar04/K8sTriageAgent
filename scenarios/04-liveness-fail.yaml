@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-looper
+  labels:
+    scenario: "04-liveness-fail"
+    app: liveness-looper
+spec:
+  containers:
+    - name: app
+      image: nginx:stable
+      livenessProbe:
+        httpGet:
+          path: /healthz          # nginx has no /healthz endpoint → 404 → probe fails
+          port: 80
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        failureThreshold: 3
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "50m"
+        limits:
+          memory: "64Mi"
+          cpu: "100m"
+  restartPolicy: Always

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: missing-config
+  labels:
+    scenario: "03-missing-configmap"
+    app: missing-config
+spec:
+  containers:
+    - name: app
+      image: nginx:stable
+      envFrom:
+        - configMapRef:
+            name: nonexistent-config   # this ConfigMap does not exist
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "50m"
+        limits:
+          memory: "64Mi"
+          cpu: "100m"
+  restartPolicy: Never

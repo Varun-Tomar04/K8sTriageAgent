@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-hog
+  labels:
+    scenario: "06-pending-resources"
+    app: resource-hog
+spec:
+  containers:
+    - name: app
+      image: nginx:stable
+      resources:
+        requests:
+          cpu: "1000"        # 1000 cores — no node in a local cluster has this
+          memory: "1000Gi"   # 1000 GiB — clearly unschedulable
+        limits:
+          cpu: "1000"
+          memory: "1000Gi"
+  restartPolicy: Never
