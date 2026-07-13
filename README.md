@@ -59,7 +59,7 @@ Safety is enforced at the subprocess layer, not in the prompt: `kubectl.py` bloc
 You'll need Python 3.11+, kubectl, minikube, and Docker.
 
 ```bash
-git clone https://github.com/Varun-Tomar04/K8sAgent
+git clone https://github.com/Varun-Tomar04/K8sTriageAgent
 cd k8s-triage-agent
 python -m venv .venv
 source .venv/bin/activate        # Windows bash: source .venv/Scripts/activate
