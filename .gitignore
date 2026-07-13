@@ -20,8 +20,3 @@ Thumbs.db
 
 # Empty scratch folder
 demo/
-
-# Personal interview-prep material — keep local, never publish
-project-walkthrough.html
-
-.claude/
